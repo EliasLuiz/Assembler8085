@@ -6,7 +6,7 @@ def int2hex(num):
     hexa = [str(i) for i in hexa]
     hexa += ['A', 'B', 'C', 'D', 'E', 'F']
     res = ""
-    while num / 16 > 0:
+    while num / 16.0 > 0:
         res += hexa[int(num % 16)]
         num = int(num / 16)
     if res == "":
@@ -397,6 +397,19 @@ instrucoes = [
 ]
 
 
+#Dicionario para armazenar os enderecos dos labels
+labels = {
+    "LETECLA" : "02E7",
+    "MOSTRAA" : "036E",
+    "MOSTRAD" : "0363",
+    "DELAY" : "05F1",
+    "letecla" : "02E7",
+    "mostraa" : "036E",
+    "mostrad" : "0363",
+    "delay" : "05F1",
+}
+
+
 
 
 
@@ -465,8 +478,6 @@ if args.abacus:
     programCounter = 8192
 else:
     programCounter = int(args.endereco)
-#Dicionario para armazenar os enderecos dos labels
-labels = {}
 #Lista para armazenar o hexadecimal do programa
 hexadecimalFinal = []
 #Parsing o pseudo codigo pegando o endereco dos labels
@@ -503,6 +514,7 @@ for hexa, nLinha, tamImediato, isLabel in hexadecimalParcial:
         hexadecimalFinal.append(hexa)
         #Incrementando o contador de programa
         programCounter += int( len( hexadecimalFinal[-1].replace(" ", "") ) / 2 )
+
 
 
 
