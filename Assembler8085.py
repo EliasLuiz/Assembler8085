@@ -437,9 +437,10 @@ with open(args.input, "r") as arquivo:
     for linha in arquivo:
         #Remocao de comentarios
         linha = linha[:(linha.find('#') if linha.find('#') != -1 else None)]
+        linha = linha.strip()
+        linha = linha.strip("\t")
         #Remocao de linhas em branco
         if linha and linha != "\n":
-            linha = linha.strip()
             fonte.append( (contLinha, linha, linha.endswith(':')) )
         contLinha+=1
 
@@ -477,7 +478,7 @@ for nLinha, linha, isLabel in fonte:
 if args.abacus:
     programCounter = 8192
 else:
-    programCounter = int(args.endereco)
+    programCounter = hex2int(args.endereco)
 #Lista para armazenar o hexadecimal do programa
 hexadecimalFinal = []
 #Parsing o pseudo codigo pegando o endereco dos labels
